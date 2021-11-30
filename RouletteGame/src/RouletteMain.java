@@ -14,30 +14,18 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class RouletteMain extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel lblWheelImg;
-	private JLabel lblPlayerInfo;
-	private JLabel lblPlayerName;
-	private JLabel lblCurrentAmt;
 	private JButton btnInstructions;
 	private JButton btnExit;
 	private JButton btnOptions;
 	private JButton btnSpin;
 	private JLabel lblGame;
-	private JLabel lblCurrentBet;
-	private JLabel lblNumSelect;
-	private JLabel lblColor;
-	private JLabel lblSpcBets;
-	private JLabel lblWinnings;
-	private JTextField Name;
-	private JTextField Amt;
-	private JTextField CurrentBet;
-	private JTextField NumSelect;
-	private JTextField Color;
-	private JTextField Winnings;
 
 	/**
 	 * Launch the application.
@@ -59,50 +47,29 @@ public class RouletteMain extends JFrame {
 	 * Create the frame.
 	 */
 	public RouletteMain() {
+		super("Roulette - Main Menu");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 565);
+		setBounds(100, 100, 600, 380);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		lblWheelImg = new JLabel("");
-		Image img = new ImageIcon(this.getClass().getResource("/RouletteWheel.png")).getImage();
+		Image img = new ImageIcon(this.getClass().getResource("/RouletteWheel_v2.png")).getImage();
 		lblWheelImg.setIcon(new ImageIcon(img));
 		lblWheelImg.setBounds(10, 11, 300, 300);
 		contentPane.add(lblWheelImg);
 		
-		lblPlayerInfo = new JLabel("Player Information");
-		lblPlayerInfo.setFont(new Font("Arial", Font.BOLD, 12));
-		lblPlayerInfo.setBounds(107, 327, 121, 30);
-		contentPane.add(lblPlayerInfo);
-		
-		lblPlayerName = new JLabel("Player Name:");
-		lblPlayerName.setBounds(10, 368, 93, 22);
-		contentPane.add(lblPlayerName);
-		
-		Name = new JTextField();
-		Name.setBounds(130, 368, 160, 20);
-		contentPane.add(Name);
-		Name.setColumns(10);
-		
-		lblCurrentAmt = new JLabel("Current Amount:");
-		lblCurrentAmt.setBounds(10, 401, 110, 22);
-		contentPane.add(lblCurrentAmt);
-		
-		Amt = new JTextField("1000");
-		Amt.setColumns(10);
-		Amt.setBounds(130, 399, 160, 20);
-		contentPane.add(Amt);
-		
 		btnInstructions = new JButton("Instructions");
 		btnInstructions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Instructions instruct = new Instructions();
+				RouletteInstructions instruct = new RouletteInstructions();
 				instruct.setVisible(true);
 			}
 		});
-		btnInstructions.setBounds(10, 474, 150, 36);
+		btnInstructions.setBounds(347, 122, 150, 36);
 		contentPane.add(btnInstructions);
 		
 		btnExit = new JButton("Exit");
@@ -112,72 +79,33 @@ public class RouletteMain extends JFrame {
 				System.exit(0);;
 			}
 		});
-		btnExit.setBounds(424, 474, 150, 36);
+		btnExit.setBounds(347, 275, 150, 36);
 		contentPane.add(btnExit);
 		
 		btnOptions = new JButton("Odds Table");
 		btnOptions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				OddsTable table = new OddsTable();
+				RouletteOdds table = new RouletteOdds();
 				table.setVisible(true);
 			}
 		});
-		btnOptions.setBounds(222, 474, 150, 36);
+		btnOptions.setBounds(347, 193, 150, 36);
 		contentPane.add(btnOptions);
 		
-		btnSpin = new JButton("Spin!");
-		btnSpin.setBounds(350, 361, 150, 36);
-		contentPane.add(btnSpin);
-		
-		lblGame = new JLabel("Roulette Game");
-		lblGame.setFont(new Font("Arial", Font.BOLD, 12));
-		lblGame.setBounds(379, 11, 121, 30);
-		contentPane.add(lblGame);
-		
-		lblCurrentBet = new JLabel("Current Bet:");
-		lblCurrentBet.setBounds(320, 52, 70, 22);
-		contentPane.add(lblCurrentBet);
-		
-		CurrentBet = new JTextField();
-		CurrentBet.addActionListener(new ActionListener() {
+		btnSpin = new JButton("Play!");
+		btnSpin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				RouletteGame.main(null);
 			}
 		});
-		CurrentBet.setText("0");
-		CurrentBet.setBounds(433, 52, 86, 20);
-		contentPane.add(CurrentBet);
-		CurrentBet.setColumns(10);
+		btnSpin.setBounds(347, 52, 150, 36);
+		contentPane.add(btnSpin);
 		
-		lblNumSelect = new JLabel("Numbers Chosen:");
-		lblNumSelect.setBounds(320, 85, 110, 22);
-		contentPane.add(lblNumSelect);
+		lblGame = new JLabel("Roulette Game - Main Menu");
+		lblGame.setFont(new Font("Arial", Font.BOLD, 12));
+		lblGame.setBounds(348, 11, 159, 30);
+		contentPane.add(lblGame);
 		
-		NumSelect = new JTextField();
-		NumSelect.setColumns(10);
-		NumSelect.setBounds(433, 86, 86, 20);
-		contentPane.add(NumSelect);
-		
-		Color = new JTextField();
-		Color.setColumns(10);
-		Color.setBounds(433, 119, 86, 20);
-		contentPane.add(Color);
-		
-		lblColor = new JLabel("Color:");
-		lblColor.setBounds(320, 118, 70, 22);
-		contentPane.add(lblColor);
-		
-		lblSpcBets = new JLabel("Special Bets");
-		lblSpcBets.setBounds(392, 161, 86, 22);
-		contentPane.add(lblSpcBets);
-		
-		lblWinnings = new JLabel("Current Winnings:");
-		lblWinnings.setBounds(10, 434, 110, 22);
-		contentPane.add(lblWinnings);
-		
-		Winnings = new JTextField("0");
-		Winnings.setColumns(10);
-		Winnings.setBounds(130, 435, 160, 20);
-		contentPane.add(Winnings);
+
 	}
 }
