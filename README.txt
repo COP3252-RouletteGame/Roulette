@@ -105,6 +105,9 @@ RouletteWheel.java - Number from “wheel” selected using randomization.
 If you have any issues running the program or the functionality of the application,
 refer to the video demo or reach out to one of the group members for assistance.
 
+Link to github page:
+https://github.com/COP3252-RouletteGame/Roulette
+
 ================================================================================
 			Thank you and we hope you enjoy Roulette!
 
